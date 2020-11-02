@@ -1,9 +1,9 @@
 local_repository(
     name = "googletest",
-    path = "/home/aaron/workspace/googletest"
+    path = "../googletest"
 )
 
 local_repository(
     name = "neopixel",
-    path = "/home/aaron/workspace/neopixel"
+    path = "../neopixel"
 )
