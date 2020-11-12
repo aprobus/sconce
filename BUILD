@@ -33,12 +33,35 @@ cc_test(
     ]
 )
 
+cc_library(
+  name = "moving_led_effect",
+  hdrs = ["moving_led_effect.h"],
+  srcs = ["moving_led_effect.cpp"],
+  deps = [
+    ":led_effect",
+    "@neopixel//:neopixel",
+  ]
+)
+
+cc_test(
+    name = "moving_led_effect_test",
+    srcs = ["moving_led_effect_test.cpp"],
+    size = "small",
+    deps = [
+      ":moving_led_effect",
+      "@googletest//:gtest",
+      "@neopixel//:neopixel",
+      "@neopixel//:mock_neopixel",
+    ]
+)
+
 ino(
   name = "sconce",
   srcs = ["sconce.ino"],
   deps = [
     ":button",
     ":solid_led_effect",
+    ":moving_led_effect",
     "@neopixel//:neopixel",
     "@neopixel//:neopixel_wrapper",
   ]
