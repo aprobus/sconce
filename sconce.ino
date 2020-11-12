@@ -2,6 +2,7 @@
 #undef max
 
 #include <Adafruit_NeoPixel.h>
+#include <vector>
 
 #include "button.h"
 #include "neopixel.h"
@@ -31,21 +32,20 @@ void setup() {
   color_t color_off = {0, 0, 0, 0};
   SolidLedEffect full_off_effect {&pixels, color_off};
 
-  bool is_on = true;
-  full_on_effect.begin();
+  std::vector<LedEffect*> led_effects;
+  led_effects.push_back(&full_on_effect);
+  led_effects.push_back(&full_off_effect);
+
+  int mode = 0;
+  led_effects[0]->begin();
 
   // Section - Loop
   while(true) {
     /*delay(500);*/
 
     if (button.captureClick()) {
-      is_on = !is_on;
-
-      if (is_on) {
-        full_on_effect.begin();
-      } else {
-        full_off_effect.begin();
-      }
+      mode = (mode + 1) % led_effects.size();
+      led_effects[mode]->begin();
     }
   }
 }
