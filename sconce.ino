@@ -3,9 +3,10 @@
 
 #include <Adafruit_NeoPixel.h>
 
+#include "button.h"
 #include "neopixel.h"
 #include "neopixel_wrapper.h"
-#include "button.h"
+#include "solid_led_effect.h"
 
 const int num_pixels = 40;
 const int neopixel_pin = 7;
@@ -25,10 +26,13 @@ void setup() {
   raw_pixels.clear();
 
   color_t color_white = {0, 0, 0, 255};
+  SolidLedEffect full_on_effect {&pixels, color_white};
+
   color_t color_off = {0, 0, 0, 0};
+  SolidLedEffect full_off_effect {&pixels, color_off};
 
   bool is_on = true;
-  setAllPixels(&pixels, color_white);
+  full_on_effect.begin();
 
   // Section - Loop
   while(true) {
@@ -38,19 +42,12 @@ void setup() {
       is_on = !is_on;
 
       if (is_on) {
-        setAllPixels(&pixels, color_white);
+        full_on_effect.begin();
       } else {
-        setAllPixels(&pixels, color_off);
+        full_off_effect.begin();
       }
     }
   }
-}
-
-void setAllPixels(Neopixel* pixels, color_t color) {
-  for (int i = 0; i < pixels->numPixels(); i += 1) {
-    pixels->setPixelColor(i, color);
-  }
-  pixels->show();
 }
 
 void loop() {
