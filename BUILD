@@ -56,6 +56,28 @@ cc_test(
 )
 
 cc_library(
+  name = "pulse_led_effect",
+  hdrs = ["pulse_led_effect.h"],
+  srcs = ["pulse_led_effect.cpp"],
+  deps = [
+    ":led_effect",
+    "@neopixel//:neopixel",
+  ]
+)
+
+cc_test(
+    name = "pulse_led_effect_test",
+    srcs = ["pulse_led_effect_test.cpp"],
+    size = "small",
+    deps = [
+      ":pulse_led_effect",
+      "@googletest//:gtest",
+      "@neopixel//:neopixel",
+      "@neopixel//:mock_neopixel",
+    ]
+)
+
+cc_library(
     name = "led_effect_driver",
     hdrs = ["led_effect_driver.h"],
     srcs = ["led_effect_driver.cpp"],
@@ -80,6 +102,7 @@ ino(
     ":button",
     ":led_effect_driver",
     ":moving_led_effect",
+    ":pulse_led_effect",
     ":solid_led_effect",
     "@neopixel//:neopixel",
     "@neopixel//:neopixel_wrapper",
