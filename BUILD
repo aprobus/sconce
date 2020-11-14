@@ -55,13 +55,32 @@ cc_test(
     ]
 )
 
+cc_library(
+    name = "led_effect_driver",
+    hdrs = ["led_effect_driver.h"],
+    srcs = ["led_effect_driver.cpp"],
+    deps = [":led_effect"]
+)
+
+cc_test(
+    name = "led_effect_driver_test",
+    srcs = ["led_effect_driver_test.cpp"],
+    size = "small",
+    deps = [
+      ":led_effect_driver",
+      ":led_effect",
+      "@googletest//:gtest",
+    ]
+)
+
 ino(
   name = "sconce",
   srcs = ["sconce.ino"],
   deps = [
     ":button",
-    ":solid_led_effect",
+    ":led_effect_driver",
     ":moving_led_effect",
+    ":solid_led_effect",
     "@neopixel//:neopixel",
     "@neopixel//:neopixel_wrapper",
   ]
