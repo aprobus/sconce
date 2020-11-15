@@ -49,8 +49,8 @@ TEST(PulseLedEffectTest, UpdateMatches) {
   effect.begin();
   effect.update(400);
 
-  color_t color_pixel {80, 40, 0, 0};
-  EXPECT_EQ(pixels.getPixelColor(0).r, color_pixel.r);
+  color_t color_pixel {57, 28, 0, 0};
+  EXPECT_EQ(pixels.getPixelColor(0), color_pixel);
   EXPECT_EQ(pixels.getPixelColor(1), color_pixel);
 
   effect.update(600);

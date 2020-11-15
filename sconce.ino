@@ -33,12 +33,12 @@ void setup() {
 
   color_t color_off = {0, 0, 0, 0};
   color_t color_white = {0, 0, 0, 255};
-  color_t color_orange = {255, 128, 0, 0};
+  color_t color_orange = {255, 128, 0, 64};
 
   led_driver.emplaceBack<SolidLedEffect>(&pixels, color_off);
   led_driver.emplaceBack<SolidLedEffect>(&pixels, color_white);
   led_driver.emplaceBack<MovingLedEffect>(&pixels, color_orange, 500);
-  led_driver.emplaceBack<PulseLedEffect>(&pixels, color_white, 1000);
+  led_driver.emplaceBack<PulseLedEffect>(&pixels, color_orange, 1000);
 
   led_driver.begin();
 
