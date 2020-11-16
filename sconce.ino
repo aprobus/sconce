@@ -10,6 +10,7 @@
 #include "neopixel.h"
 #include "neopixel_wrapper.h"
 #include "pulse_led_effect.h"
+#include "repeated_led_effect.h"
 #include "solid_led_effect.h"
 
 const int num_pixels = 40;
@@ -38,7 +39,7 @@ void setup() {
   led_driver.emplaceBack<SolidLedEffect>(&pixels, color_off);
   led_driver.emplaceBack<SolidLedEffect>(&pixels, color_white);
   led_driver.emplaceBack<MovingLedEffect>(&pixels, color_orange, 500);
-  led_driver.emplaceBack<PulseLedEffect>(&pixels, color_orange, 1000);
+  led_driver.emplaceBack<RepeatedLedEffect<PulseLedEffect>>(&pixels, color_orange, 1000);
 
   led_driver.begin();
 

@@ -30,20 +30,22 @@ namespace {
 }
 
 void PulseLedEffect::update(unsigned long millis) {
-  unsigned long current_millis = millis % pulse_millis_;
-
-  if (current_millis == 0) {
+  if (millis >= pulse_millis_) {
+    return;
+  } else if (millis == 0) {
     pixels_->clear();
+    pixels_->show();
     return;
   }
 
   unsigned long peak_millis = pulse_millis_ / 2;
   // x ms after peak will be same as x millis before peak
-  if (current_millis > peak_millis) {
-    current_millis = peak_millis - (current_millis - peak_millis);
+  unsigned long display_millis = millis;
+  if (display_millis > peak_millis) {
+    display_millis = peak_millis - (millis - peak_millis);
   }
 
-  int completion_percent = static_cast<int>(current_millis * 100 / peak_millis);
+  int completion_percent = static_cast<int>(display_millis * 100 / peak_millis);
   color_t actual_color = {
     scale_color(color_.r, completion_percent),
     scale_color(color_.g, completion_percent),
@@ -55,4 +57,8 @@ void PulseLedEffect::update(unsigned long millis) {
     pixels_->setPixelColor(i, actual_color);
   }
   pixels_->show();
+}
+
+unsigned long PulseLedEffect::length() const {
+  return pulse_millis_;
 }

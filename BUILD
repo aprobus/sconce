@@ -12,6 +12,21 @@ cc_library(
 )
 
 cc_library(
+  name = "repeated_led_effect",
+  hdrs = ["repeated_led_effect.h"],
+  deps = [":led_effect"]
+)
+
+cc_test(
+  name = "repeated_led_effect_test",
+  srcs = ["repeated_led_effect_test.cpp"],
+  deps = [
+    ":repeated_led_effect",
+    "@googletest//:gtest",
+  ]
+)
+
+cc_library(
   name = "solid_led_effect",
   hdrs = ["solid_led_effect.h"],
   srcs = ["solid_led_effect.cpp"],
@@ -103,6 +118,7 @@ ino(
     ":led_effect_driver",
     ":moving_led_effect",
     ":pulse_led_effect",
+    ":repeated_led_effect",
     ":solid_led_effect",
     "@neopixel//:neopixel",
     "@neopixel//:neopixel_wrapper",
