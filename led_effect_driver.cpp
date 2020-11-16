@@ -9,7 +9,7 @@ void LedEffectDriver::begin() {
     return;
   }
 
-  led_effects_[index_]->begin();
+  led_effects_[index_]->update(0);
 }
 
 void LedEffectDriver::next(unsigned long millis) {
@@ -19,7 +19,7 @@ void LedEffectDriver::next(unsigned long millis) {
 
   switched_at_millis_ = millis;
   index_ = (index_ + 1) % led_effects_.size();
-  led_effects_[index_]->begin();
+  led_effects_[index_]->update(0);
 }
 
 void LedEffectDriver::onTimerUpdated(unsigned long millis) {

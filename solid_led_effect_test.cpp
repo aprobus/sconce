@@ -4,7 +4,7 @@
 #include "neopixel.h"
 #include "mock_neopixel.h"
 
-TEST(SolidLedEffectTest, Begin) {
+TEST(SolidLedEffectTest, Update) {
   FakeNeopixel<10> pixels;
   color_t color {34, 1, 2, 10};
   SolidLedEffect effect {&pixels, color};
@@ -13,7 +13,7 @@ TEST(SolidLedEffectTest, Begin) {
     EXPECT_NE(pixels.getPixelColor(i), color);
   }
 
-  effect.begin();
+  effect.update(0);
 
   for (int i = 0; i < pixels.numPixels(); i++) {
     EXPECT_EQ(pixels.getPixelColor(i), color);

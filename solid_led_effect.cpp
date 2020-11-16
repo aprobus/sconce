@@ -4,8 +4,7 @@
 
 SolidLedEffect::SolidLedEffect(Neopixel* pixels, color_t color) : pixels_(pixels), color_(color) {}
 
-void SolidLedEffect::begin() {
-  pixels_->clear();
+void SolidLedEffect::update(unsigned long millis) {
   for (int i = 0; i < pixels_->numPixels(); i++) {
     pixels_->setPixelColor(i, color_);
   }

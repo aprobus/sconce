@@ -29,10 +29,6 @@ namespace {
   }
 }
 
-void PulseLedEffect::begin() {
-  update(0);
-}
-
 void PulseLedEffect::update(unsigned long millis) {
   unsigned long current_millis = millis % pulse_millis_;
 

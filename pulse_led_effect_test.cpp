@@ -4,12 +4,12 @@
 #include "neopixel.h"
 #include "mock_neopixel.h"
 
-TEST(PulseLedEffectTest, Begin) {
+TEST(PulseLedEffectTest, UpdateStart) {
   FakeNeopixel<2> pixels;
   color_t color {100, 50, 0, 0};
   PulseLedEffect effect {&pixels, color, 1000};
 
-  effect.begin();
+  effect.update(0);
 
   color_t color_off {0, 0, 0, 0};
   EXPECT_EQ(pixels.getPixelColor(0), color_off);
@@ -21,7 +21,6 @@ TEST(PulseLedEffectTest, UpdatePeak) {
   color_t color {100, 50, 0, 0};
   PulseLedEffect effect {&pixels, color, 1000};
 
-  effect.begin();
   effect.update(500);
 
   EXPECT_EQ(pixels.getPixelColor(0), color);
@@ -33,7 +32,6 @@ TEST(PulseLedEffectTest, UpdateEnd) {
   color_t color {100, 50, 0, 0};
   PulseLedEffect effect {&pixels, color, 1000};
 
-  effect.begin();
   effect.update(1000);
 
   color_t color_off {0, 0, 0, 0};
@@ -46,7 +44,6 @@ TEST(PulseLedEffectTest, UpdateMatches) {
   color_t color {100, 50, 0, 0};
   PulseLedEffect effect {&pixels, color, 1000};
 
-  effect.begin();
   effect.update(400);
 
   color_t color_pixel {57, 28, 0, 0};

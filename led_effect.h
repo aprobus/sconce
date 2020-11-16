@@ -4,7 +4,6 @@
 class LedEffect {
   public:
   virtual ~LedEffect() = default;
-  virtual void begin() = 0;
   virtual void update(unsigned long millis) {};
 };
 

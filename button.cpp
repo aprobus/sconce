@@ -1,6 +1,15 @@
 #include "button.h"
 
+#ifdef ARDUINO
 #include <Arduino.h>
+#else
+int digitalRead(int i) {
+  return 0;
+}
+void pinMode(int i, int x) { }
+constexpr int HIGH = 1;
+constexpr int INPUT = 0;
+#endif
 
 Button::Button(int pin) : pin_(pin) {
 }

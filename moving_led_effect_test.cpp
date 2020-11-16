@@ -9,7 +9,7 @@ TEST(MovingLedEffectTest, Begin) {
   color_t color {34, 1, 2, 10};
   MovingLedEffect effect {&pixels, color, 10};
 
-  effect.begin();
+  effect.update(0);
 
   EXPECT_EQ(pixels.getPixelColor(0), color);
   EXPECT_NE(pixels.getPixelColor(1), color);
@@ -19,8 +19,6 @@ TEST(MovingLedEffectTest, UpdateBeforeSwitch) {
   FakeNeopixel<10> pixels;
   color_t color {34, 1, 2, 10};
   MovingLedEffect effect {&pixels, color, 10};
-
-  effect.begin();
 
   effect.update(9);
   EXPECT_EQ(pixels.getPixelColor(0), color);
@@ -32,8 +30,6 @@ TEST(MovingLedEffectTest, UpdateOnSwitch) {
   color_t color {34, 1, 2, 10};
   MovingLedEffect effect {&pixels, color, 10};
 
-  effect.begin();
-
   effect.update(10);
   EXPECT_NE(pixels.getPixelColor(0), color);
   EXPECT_EQ(pixels.getPixelColor(1), color);
@@ -43,8 +39,6 @@ TEST(MovingLedEffectTest, UpdateOnRollOver) {
   FakeNeopixel<10> pixels;
   color_t color {34, 1, 2, 10};
   MovingLedEffect effect {&pixels, color, 10};
-
-  effect.begin();
 
   effect.update(100);
   EXPECT_EQ(pixels.getPixelColor(0), color);

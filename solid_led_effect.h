@@ -8,7 +8,7 @@ class SolidLedEffect : public LedEffect {
   public:
   SolidLedEffect(Neopixel* pixels, color_t color);
   ~SolidLedEffect() = default;
-  void begin() override;
+  void update(unsigned long millis) override;
   private:
     Neopixel* pixels_;
     color_t color_;

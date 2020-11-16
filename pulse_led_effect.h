@@ -7,7 +7,6 @@
 class PulseLedEffect : public LedEffect {
   public:
     PulseLedEffect(Neopixel* pixels, color_t color, unsigned long pulse_millis);
-    void begin() override;
     void update(unsigned long millis) override;
   private:
     Neopixel* pixels_;
