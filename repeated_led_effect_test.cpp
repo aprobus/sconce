@@ -3,22 +3,7 @@
 #include <memory>
 
 #include "gtest/gtest.h"
-#include "led_effect.h"
-
-class MockEffect : public TimedLedEffect {
-  public:
-  MockEffect(unsigned long* millis) : last_millis_(millis) {}
-
-  void update(unsigned long millis) override {
-    *last_millis_ = millis;
-  }
-
-  unsigned long length() const override {
-    return 100;
-  }
-
-  unsigned long* last_millis_;
-};
+#include "mock_led_effect.h"
 
 TEST(RepeatedLedEffect, Update) {
   unsigned long out = 0;

@@ -21,7 +21,32 @@ cc_test(
   name = "repeated_led_effect_test",
   srcs = ["repeated_led_effect_test.cpp"],
   deps = [
+    ":mock_led_effect",
     ":repeated_led_effect",
+    "@googletest//:gtest",
+  ]
+)
+
+cc_library(
+  name = "mock_led_effect",
+  hdrs = ["mock_led_effect.h"],
+  testonly = True
+)
+
+cc_library(
+  name = "sequential_led_effect",
+  hdrs = ["sequential_led_effect.h"],
+  srcs = ["sequential_led_effect.cpp"],
+  deps = [":led_effect"]
+)
+
+cc_test(
+  name = "sequential_led_effect_test",
+  srcs = ["sequential_led_effect_test.cpp"],
+  deps = [
+    ":sequential_led_effect",
+    ":mock_led_effect",
+    "@neopixel//:neopixel",
     "@googletest//:gtest",
   ]
 )
