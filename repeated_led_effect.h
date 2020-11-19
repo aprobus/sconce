@@ -18,4 +18,15 @@ class RepeatedLedEffect : public LedEffect {
   T effect_;
 };
 
+class WrappedRepeatedLedEffect : public LedEffect {
+  public:
+  WrappedRepeatedLedEffect(std::unique_ptr<TimedLedEffect> effect) : effect_(std::move(effect)) {}
+
+  void update(unsigned long millis) {
+    effect_->update(millis % effect_->length());
+  }
+  private:
+  std::unique_ptr<TimedLedEffect> effect_;
+};
+
 #endif

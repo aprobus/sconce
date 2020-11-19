@@ -144,6 +144,7 @@ ino(
     ":moving_led_effect",
     ":pulse_led_effect",
     ":repeated_led_effect",
+    ":sequential_led_effect",
     ":solid_led_effect",
     "@neopixel//:neopixel",
     "@neopixel//:neopixel_wrapper",

@@ -11,6 +11,7 @@
 #include "neopixel_wrapper.h"
 #include "pulse_led_effect.h"
 #include "repeated_led_effect.h"
+#include "sequential_led_effect.h"
 #include "solid_led_effect.h"
 
 const int num_pixels = 40;
@@ -35,11 +36,20 @@ void setup() {
   color_t color_off = {0, 0, 0, 0};
   color_t color_white = {0, 0, 0, 255};
   color_t color_orange = {255, 128, 0, 64};
+  color_t color_green = {0, 255, 0, 0};
+  color_t color_red = {255, 0, 0, 0};
 
   led_driver.emplaceBack<SolidLedEffect>(&pixels, color_off);
   led_driver.emplaceBack<SolidLedEffect>(&pixels, color_white);
   led_driver.emplaceBack<MovingLedEffect>(&pixels, color_orange, 500);
   led_driver.emplaceBack<RepeatedLedEffect<PulseLedEffect>>(&pixels, color_orange, 1000);
+
+  std::unique_ptr<SequentialLedEffect> christmas_seq;
+  christmas_seq->emplaceBack<PulseLedEffect>(&pixels, color_green, 1000);
+  christmas_seq->emplaceBack<PulseLedEffect>(&pixels, color_red, 1000);
+  christmas_seq->emplaceBack<PulseLedEffect>(&pixels, color_white, 1000);
+  auto christmas_effect = std::unique_ptr<WrappedRepeatedLedEffect>(new WrappedRepeatedLedEffect(std::move(christmas_seq)));
+  led_driver.pushBack(std::move(christmas_effect));
 
   led_driver.begin();
 
