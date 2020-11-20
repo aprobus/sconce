@@ -38,13 +38,14 @@ void setup() {
   color_t color_orange = {255, 128, 0, 64};
   color_t color_green = {0, 255, 0, 0};
   color_t color_red = {255, 0, 0, 0};
+  color_t color_blue = {0, 0, 255, 0};
 
   led_driver.emplaceBack<SolidLedEffect>(&pixels, color_off);
   led_driver.emplaceBack<SolidLedEffect>(&pixels, color_white);
   led_driver.emplaceBack<MovingLedEffect>(&pixels, color_orange, 500);
   led_driver.emplaceBack<RepeatedLedEffect<PulseLedEffect>>(&pixels, color_orange, 1000);
 
-  std::unique_ptr<SequentialLedEffect> christmas_seq;
+  auto christmas_seq = std::unique_ptr<SequentialLedEffect>(new SequentialLedEffect());
   christmas_seq->emplaceBack<PulseLedEffect>(&pixels, color_green, 1000);
   christmas_seq->emplaceBack<PulseLedEffect>(&pixels, color_red, 1000);
   christmas_seq->emplaceBack<PulseLedEffect>(&pixels, color_white, 1000);

@@ -1,6 +1,7 @@
 #ifndef REPEATED_LED_EFFECT_H
 #define REPEATED_LED_EFFECT_H
 
+#include <memory>
 #include <utility>
 
 #include "led_effect.h"

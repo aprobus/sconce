@@ -23,6 +23,7 @@ void SequentialLedEffect::update(unsigned long millis) {
     } else if (millis < effects_[mid].start) {
       right = mid - 1;
     } else {
+      left = mid;
       break;
     }
   }
