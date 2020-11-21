@@ -3,16 +3,16 @@
 
 #include "led_effect.h"
 #include "neopixel.h"
+#include "pulse_color_function.h"
 
 class PulseLedEffect : public LedEffect {
   public:
-    PulseLedEffect(Neopixel* pixels, color_t color, unsigned long pulse_millis);
+    PulseLedEffect(Neopixel* pixels, PulseColorFunction f);
     void update(unsigned long millis) override;
     unsigned long length() const override;
   private:
     Neopixel* pixels_;
-    color_t color_;
-    unsigned long pulse_millis_;
+    PulseColorFunction pulse_function_;
 };
 
 #endif

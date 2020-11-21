@@ -12,6 +12,12 @@ cc_library(
 )
 
 cc_library(
+  name = "color_function",
+  hdrs = ["color_function.h"],
+  deps = ["@neopixel//:neopixel"],
+)
+
+cc_library(
   name = "repeated_led_effect",
   hdrs = ["repeated_led_effect.h"],
   deps = [":led_effect"]
@@ -101,6 +107,7 @@ cc_library(
   srcs = ["pulse_led_effect.cpp"],
   deps = [
     ":led_effect",
+    ":pulse_color_function",
     "@neopixel//:neopixel",
   ]
 )
@@ -135,6 +142,27 @@ cc_test(
     ]
 )
 
+cc_library(
+    name = "pulse_color_function",
+    hdrs = ["pulse_color_function.h"],
+    srcs = ["pulse_color_function.cpp"],
+    deps = [
+      ":color_function",
+      "@neopixel//:neopixel"
+    ]
+)
+
+cc_test(
+    name = "pulse_color_function_test",
+    srcs = ["pulse_color_function_test.cpp"],
+    size = "small",
+    deps = [
+      ":pulse_color_function",
+      "@neopixel//:neopixel",
+      "@googletest//:gtest",
+    ]
+)
+
 ino(
   name = "sconce",
   srcs = ["sconce.ino"],
@@ -142,6 +170,7 @@ ino(
     ":button",
     ":led_effect_driver",
     ":moving_led_effect",
+    ":pulse_color_function",
     ":pulse_led_effect",
     ":repeated_led_effect",
     ":sequential_led_effect",
