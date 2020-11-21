@@ -5,18 +5,23 @@
 #include "gtest/gtest.h"
 #include "mock_led_effect.h"
 
+using ::testing::Eq;
+using ::testing::Return;
+
 TEST(RepeatedLedEffect, Update) {
-  unsigned long out = 0;
-  RepeatedLedEffect<MockEffect> effect(&out);
-  effect.update(50);
-  EXPECT_EQ(out, 50);
+  auto mock_effect = std::unique_ptr<MockLedEffect>(new MockLedEffect());
+  EXPECT_CALL(*mock_effect, length()).WillOnce(Return(10));
+  EXPECT_CALL(*mock_effect, update(Eq(8)));
+  WrappedRepeatedLedEffect effect(std::move(mock_effect));
+  effect.update(8);
 }
 
 TEST(RepeatedLedEffect, UpdateOverflow) {
-  unsigned long out = 0;
-  RepeatedLedEffect<MockEffect> effect(&out);
-  effect.update(150);
-  EXPECT_EQ(out, 50);
+  auto mock_effect = std::unique_ptr<MockLedEffect>(new MockLedEffect());
+  EXPECT_CALL(*mock_effect, length()).WillOnce(Return(10));
+  EXPECT_CALL(*mock_effect, update(Eq(8)));
+  WrappedRepeatedLedEffect effect(std::move(mock_effect));
+  effect.update(18);
 }
 
 int main(int argc, char **argv) {

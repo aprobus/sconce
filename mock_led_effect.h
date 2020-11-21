@@ -1,20 +1,13 @@
 #ifndef MOCK_LED_EFFECT_H
 #define MOCK_LED_EFFECT_H
 
+#include "gmock/gmock.h"
 #include "led_effect.h"
 
-class MockEffect : public LedEffect {
+class MockLedEffect : public LedEffect {
   public:
-  MockEffect(unsigned long* millis) : last_millis_(millis) {}
-
-  void update(unsigned long millis) override {
-    *last_millis_ = millis;
-  }
-
-  unsigned long length() const override {
-    return 100;
-  }
-
-  unsigned long* last_millis_;
+  MOCK_METHOD(void, update, (unsigned long), (override));
+  MOCK_METHOD(unsigned long, length, (), (const override));
 };
+
 #endif
