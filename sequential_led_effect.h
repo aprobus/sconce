@@ -7,7 +7,7 @@
 
 #include "led_effect.h"
 
-class SequentialLedEffect : public TimedLedEffect {
+class SequentialLedEffect : public LedEffect {
   public:
   SequentialLedEffect() = default;
   void update(unsigned long millis) override;
@@ -18,13 +18,13 @@ class SequentialLedEffect : public TimedLedEffect {
     pushBack(std::unique_ptr<T>(new T(std::forward<Args>(args)...)));
   }
 
-  void pushBack(std::unique_ptr<TimedLedEffect> effect);
+  void pushBack(std::unique_ptr<LedEffect> effect);
 
   private:
   struct EffectInterval {
     unsigned long start = 0;
     unsigned long end = 0;
-    std::unique_ptr<TimedLedEffect> effect;
+    std::unique_ptr<LedEffect> effect;
   };
   std::vector<EffectInterval> effects_;
 };

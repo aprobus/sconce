@@ -4,7 +4,7 @@
 #include "led_effect.h"
 #include "neopixel.h"
 
-class PulseLedEffect : public TimedLedEffect {
+class PulseLedEffect : public LedEffect {
   public:
     PulseLedEffect(Neopixel* pixels, color_t color, unsigned long pulse_millis);
     void update(unsigned long millis) override;

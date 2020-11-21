@@ -16,6 +16,10 @@ class BasicLedEffect : public LedEffect {
     void update(unsigned long millis) override {
       output_->last_update_millis = millis;
     }
+
+    unsigned long length() const override {
+      return 100;
+    }
   private:
     BasicLedOutput* output_;
 };

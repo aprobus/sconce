@@ -10,6 +10,7 @@ class MovingLedEffect : public LedEffect {
   public:
   MovingLedEffect(Neopixel* pixels, color_t color, unsigned long millis_per_pixel);
   void update(unsigned long millis) override;
+  unsigned long length() const override;
 
   private:
   Neopixel* pixels_;

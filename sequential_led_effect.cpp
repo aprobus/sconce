@@ -32,7 +32,7 @@ void SequentialLedEffect::update(unsigned long millis) {
   x.effect->update(millis - x.start);
 }
 
-void SequentialLedEffect::pushBack(std::unique_ptr<TimedLedEffect> effect) {
+void SequentialLedEffect::pushBack(std::unique_ptr<LedEffect> effect) {
     EffectInterval interval;
     interval.effect = std::move(effect);
     if (effects_.empty()) {

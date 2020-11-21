@@ -3,7 +3,7 @@
 
 #include "led_effect.h"
 
-class MockEffect : public TimedLedEffect {
+class MockEffect : public LedEffect {
   public:
   MockEffect(unsigned long* millis) : last_millis_(millis) {}
 

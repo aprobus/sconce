@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <utility>
+#include <limits>
 
 #include "led_effect.h"
 
@@ -15,19 +16,28 @@ class RepeatedLedEffect : public LedEffect {
   void update(unsigned long millis) {
     effect_.update(millis % effect_.length());
   }
+
+  unsigned long length() const {
+    return std::numeric_limits<unsigned long>::max();
+  }
+
   private:
   T effect_;
 };
 
 class WrappedRepeatedLedEffect : public LedEffect {
   public:
-  WrappedRepeatedLedEffect(std::unique_ptr<TimedLedEffect> effect) : effect_(std::move(effect)) {}
+  WrappedRepeatedLedEffect(std::unique_ptr<LedEffect> effect) : effect_(std::move(effect)) {}
 
   void update(unsigned long millis) {
     effect_->update(millis % effect_->length());
   }
+
+  unsigned long length() const {
+    return std::numeric_limits<unsigned long>::max();
+  }
   private:
-  std::unique_ptr<TimedLedEffect> effect_;
+  std::unique_ptr<LedEffect> effect_;
 };
 
 #endif

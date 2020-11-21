@@ -5,12 +5,6 @@ class LedEffect {
   public:
   virtual ~LedEffect() = default;
   virtual void update(unsigned long millis) = 0;
-};
-
-class TimedLedEffect {
-  public:
-  virtual ~TimedLedEffect() = default;
-  virtual void update(unsigned long millis) = 0;
   virtual unsigned long length() const = 0;
 };
 
