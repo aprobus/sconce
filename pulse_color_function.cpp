@@ -25,7 +25,7 @@ namespace {
 
 PulseColorFunction::PulseColorFunction(color_t color, unsigned long length) : color_(color), length_(length) {}
 
-color_t PulseColorFunction::operator()(unsigned long millis) const {
+color_t PulseColorFunction::color(unsigned long millis) const {
   if (millis >= length_) {
     return {0, 0, 0, 0};
   } else if (millis == 0) {

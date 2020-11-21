@@ -6,7 +6,7 @@
 class ColorFunction {
   public:
     virtual ~ColorFunction() = default;
-    virtual color_t operator()(unsigned long) const = 0;
+    virtual color_t color(unsigned long millis) const = 0;
     virtual unsigned long length() const = 0;
 };
 

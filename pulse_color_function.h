@@ -7,7 +7,7 @@
 class PulseColorFunction : public ColorFunction {
   public:
     PulseColorFunction(color_t color, unsigned long length);
-    color_t operator()(unsigned long millis) const override;
+    color_t color(unsigned long millis) const override;
     unsigned long length() const override;
   private:
     color_t color_;

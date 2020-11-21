@@ -36,6 +36,11 @@ cc_test(
 cc_library(
   name = "mock_led_effect",
   hdrs = ["mock_led_effect.h"],
+  deps = [
+    ":led_effect",
+    ":color_function",
+    "@neopixel//:neopixel",
+  ],
   testonly = True
 )
 
@@ -102,22 +107,23 @@ cc_test(
 )
 
 cc_library(
-  name = "pulse_led_effect",
-  hdrs = ["pulse_led_effect.h"],
-  srcs = ["pulse_led_effect.cpp"],
+  name = "interleaved_led_effect",
+  hdrs = ["interleaved_led_effect.h"],
+  srcs = ["interleaved_led_effect.cpp"],
   deps = [
     ":led_effect",
-    ":pulse_color_function",
+    ":color_function",
     "@neopixel//:neopixel",
   ]
 )
 
 cc_test(
-    name = "pulse_led_effect_test",
-    srcs = ["pulse_led_effect_test.cpp"],
+    name = "interleaved_led_effect_test",
+    srcs = ["interleaved_led_effect_test.cpp"],
     size = "small",
     deps = [
-      ":pulse_led_effect",
+      ":interleaved_led_effect",
+      ":mock_led_effect",
       "@googletest//:gtest",
       "@neopixel//:neopixel",
       "@neopixel//:mock_neopixel",
@@ -168,10 +174,10 @@ ino(
   srcs = ["sconce.ino"],
   deps = [
     ":button",
+    ":interleaved_led_effect",
     ":led_effect_driver",
     ":moving_led_effect",
     ":pulse_color_function",
-    ":pulse_led_effect",
     ":repeated_led_effect",
     ":sequential_led_effect",
     ":solid_led_effect",
