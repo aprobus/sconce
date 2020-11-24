@@ -49,19 +49,23 @@ TEST(InterleavedLedEffectTest, MultiFunction) {
   EXPECT_EQ(pixels.getPixelColor(2), pixel_color);
 }
 
-TEST(InterleavedLedEffectTest, MultiMismatchedLength) {
+TEST(InterleavedLedEffectTest, MultiMismatchedUpdate) {
   FakeNeopixel<3> pixels;
   InterleavedLedEffect effect {&pixels};
 
   auto cf1 = std::unique_ptr<MockColorFunction>(new MockColorFunction());
+  color_t red = {1, 0, 0, 0};
   EXPECT_CALL(*cf1, length()).WillOnce(Return(10));
+  EXPECT_CALL(*cf1, color(Eq(2))).WillOnce(Return(red));
   effect.pushBack(std::move(cf1));
 
   auto cf2 = std::unique_ptr<MockColorFunction>(new MockColorFunction());
+  color_t green = {0, 1, 0, 0};
   EXPECT_CALL(*cf2, length()).WillOnce(Return(15));
+  EXPECT_CALL(*cf2, color(Eq(12))).WillOnce(Return(green));
   effect.pushBack(std::move(cf2));
 
-  EXPECT_EQ(effect.length(), 15);
+  effect.update(12);
 }
 
 int main(int argc, char **argv) {

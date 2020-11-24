@@ -44,11 +44,10 @@ void setup() {
   led_driver.emplaceBack<SolidLedEffect>(&pixels, color_white);
 
   auto christmas_seq = std::unique_ptr<InterleavedLedEffect>(new InterleavedLedEffect(&pixels));
-  christmas_seq->emplaceBack<PulseColorFunction>(color_t(0, 64, 16, 0), color_t(0, 255, 32, 0), 1000);
-  christmas_seq->emplaceBack<PulseColorFunction>(color_t(64, 0, 0, 0), color_t(255, 16, 0, 0), 1000);
-  christmas_seq->emplaceBack<PulseColorFunction>(color_t(0, 0, 0, 32), color_t(0, 0, 0, 128), 1000);
-  auto christmas_effect = std::unique_ptr<WrappedRepeatedLedEffect>(new WrappedRepeatedLedEffect(std::move(christmas_seq)));
-  led_driver.pushBack(std::move(christmas_effect));
+  christmas_seq->emplaceBack<PulseColorFunction>(color_t(0, 64, 8, 0), color_t(0, 255, 16, 0), 900);
+  christmas_seq->emplaceBack<PulseColorFunction>(color_t(64, 0, 0, 0), color_t(255, 8, 0, 0), 1100);
+  christmas_seq->emplaceBack<PulseColorFunction>(color_t(0, 0, 0, 16), color_t(0, 0, 0, 64), 1300);
+  led_driver.pushBack(std::move(christmas_seq));
 
   led_driver.begin();
 

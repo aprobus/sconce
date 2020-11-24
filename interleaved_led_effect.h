@@ -22,7 +22,6 @@ class InterleavedLedEffect : public LedEffect {
     }
   private:
     Neopixel* pixels_;
-    unsigned long length_ = 0;
     std::vector<std::unique_ptr<ColorFunction>> colors_functions_;
 };
 
