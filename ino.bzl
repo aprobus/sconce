@@ -24,15 +24,6 @@ arduino_aspect = aspect(implementation = _arduino_aspect_impl,
 )
 
 def _ino_impl(ctx):
-  #arduino_dir = ctx.actions.declare_directory(ctx.label.name)
-  #print('Making directory: {}'.format(arduino_dir.path))
-  #ctx.actions.run_shell(
-    #inputs = [],
-    #outputs = [arduino_dir],
-    #command = 'mkdir -p {}'.format(arduino_dir.path)
-  #)
-
-  #out_files = [arduino_dir]
   out_files = []
 
   src_files = depset(ctx.files.srcs, transitive = [d[ArduinoInfo].files for d in ctx.attr.deps])
