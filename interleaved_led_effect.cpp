@@ -2,10 +2,10 @@
 
 #include <limits>
 
-#include "neopixel.h"
 #include "color_function.h"
+#include "led_strip.h"
 
-InterleavedLedEffect::InterleavedLedEffect(Neopixel* pixels) : pixels_(pixels) {}
+InterleavedLedEffect::InterleavedLedEffect(LedStrip* pixels) : pixels_(pixels) {}
 
 void InterleavedLedEffect::update(unsigned long millis) {
   for (int i = 0; i < colors_functions_.size(); i++) {

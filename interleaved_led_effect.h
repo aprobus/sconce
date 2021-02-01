@@ -5,13 +5,13 @@
 #include <utility>
 #include <vector>
 
-#include "led_effect.h"
-#include "neopixel.h"
 #include "color_function.h"
+#include "led_effect.h"
+#include "led_strip.h"
 
 class InterleavedLedEffect : public LedEffect {
   public:
-    InterleavedLedEffect(Neopixel* pixels);
+    InterleavedLedEffect(LedStrip* pixels);
     void update(unsigned long millis) override;
     unsigned long length() const override;
     void pushBack(std::unique_ptr<ColorFunction> f);
@@ -21,7 +21,7 @@ class InterleavedLedEffect : public LedEffect {
       pushBack(std::unique_ptr<T>(new T(std::forward<Args>(args)...)));
     }
   private:
-    Neopixel* pixels_;
+    LedStrip* pixels_;
     std::vector<std::unique_ptr<ColorFunction>> colors_functions_;
 };
 

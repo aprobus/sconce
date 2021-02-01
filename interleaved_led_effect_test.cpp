@@ -3,15 +3,15 @@
 #include <memory>
 
 #include "gtest/gtest.h"
+#include "led_strip.h"
 #include "mock_led_effect.h"
-#include "mock_neopixel.h"
-#include "neopixel.h"
+#include "mock_led_strip.h"
 
 using ::testing::Eq;
 using ::testing::Return;
 
 TEST(InterleavedLedEffectTest, Begin) {
-  FakeNeopixel<2> pixels;
+  FakeLedStrip<2> pixels;
   InterleavedLedEffect effect {&pixels};
 
   color_t pixel_color (20, 11, 3, 1);
@@ -27,7 +27,7 @@ TEST(InterleavedLedEffectTest, Begin) {
 }
 
 TEST(InterleavedLedEffectTest, MultiFunction) {
-  FakeNeopixel<3> pixels;
+  FakeLedStrip<3> pixels;
   InterleavedLedEffect effect {&pixels};
 
   color_t pixel_color (20, 11, 3, 1);
@@ -50,7 +50,7 @@ TEST(InterleavedLedEffectTest, MultiFunction) {
 }
 
 TEST(InterleavedLedEffectTest, MultiMismatchedUpdate) {
-  FakeNeopixel<3> pixels;
+  FakeLedStrip<3> pixels;
   InterleavedLedEffect effect {&pixels};
 
   auto cf1 = std::unique_ptr<MockColorFunction>(new MockColorFunction());

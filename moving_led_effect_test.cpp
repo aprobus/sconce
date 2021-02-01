@@ -1,11 +1,11 @@
 #include "moving_led_effect.h"
 
 #include "gtest/gtest.h"
-#include "neopixel.h"
-#include "mock_neopixel.h"
+#include "led_strip.h"
+#include "mock_led_strip.h"
 
 TEST(MovingLedEffectTest, Begin) {
-  FakeNeopixel<10> pixels;
+  FakeLedStrip<10> pixels;
   color_t color {34, 1, 2, 10};
   MovingLedEffect effect {&pixels, color, 10};
 
@@ -16,7 +16,7 @@ TEST(MovingLedEffectTest, Begin) {
 }
 
 TEST(MovingLedEffectTest, UpdateBeforeSwitch) {
-  FakeNeopixel<10> pixels;
+  FakeLedStrip<10> pixels;
   color_t color {34, 1, 2, 10};
   MovingLedEffect effect {&pixels, color, 10};
 
@@ -26,7 +26,7 @@ TEST(MovingLedEffectTest, UpdateBeforeSwitch) {
 }
 
 TEST(MovingLedEffectTest, UpdateOnSwitch) {
-  FakeNeopixel<10> pixels;
+  FakeLedStrip<10> pixels;
   color_t color {34, 1, 2, 10};
   MovingLedEffect effect {&pixels, color, 10};
 
@@ -36,7 +36,7 @@ TEST(MovingLedEffectTest, UpdateOnSwitch) {
 }
 
 TEST(MovingLedEffectTest, UpdateOnRollOver) {
-  FakeNeopixel<10> pixels;
+  FakeLedStrip<10> pixels;
   color_t color {34, 1, 2, 10};
   MovingLedEffect effect {&pixels, color, 10};
 

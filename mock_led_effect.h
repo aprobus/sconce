@@ -4,7 +4,7 @@
 #include "color_function.h"
 #include "gmock/gmock.h"
 #include "led_effect.h"
-#include "neopixel.h"
+#include "led_strip.h"
 
 class MockLedEffect : public LedEffect {
   public:

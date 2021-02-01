@@ -2,7 +2,7 @@
 #define PULSE_COLOR_FUNCTION_H
 
 #include "color_function.h"
-#include "neopixel.h"
+#include "led_strip.h"
 
 class PulseColorFunction : public ColorFunction {
   public:

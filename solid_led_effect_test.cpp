@@ -1,11 +1,11 @@
 #include "solid_led_effect.h"
 
 #include "gtest/gtest.h"
-#include "neopixel.h"
-#include "mock_neopixel.h"
+#include "led_strip.h"
+#include "mock_led_strip.h"
 
 TEST(SolidLedEffectTest, Update) {
-  FakeNeopixel<10> pixels;
+  FakeLedStrip<10> pixels;
   color_t color {34, 1, 2, 10};
   SolidLedEffect effect {&pixels, color};
 

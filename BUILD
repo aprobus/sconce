@@ -14,7 +14,7 @@ cc_library(
 cc_library(
   name = "color_function",
   hdrs = ["color_function.h"],
-  deps = ["@neopixel//:neopixel"],
+  deps = ["@aurora//:led_strip"],
 )
 
 cc_library(
@@ -39,7 +39,7 @@ cc_library(
   deps = [
     ":led_effect",
     ":color_function",
-    "@neopixel//:neopixel",
+    "@aurora//:led_strip",
   ],
   testonly = True
 )
@@ -57,7 +57,7 @@ cc_test(
   deps = [
     ":sequential_led_effect",
     ":mock_led_effect",
-    "@neopixel//:neopixel",
+    "@aurora//:led_strip",
     "@googletest//:gtest",
   ]
 )
@@ -68,7 +68,7 @@ cc_library(
   srcs = ["solid_led_effect.cpp"],
   deps = [
     ":led_effect",
-    "@neopixel//:neopixel",
+    "@aurora//:led_strip",
   ]
 )
 
@@ -79,8 +79,8 @@ cc_test(
     deps = [
       ":solid_led_effect",
       "@googletest//:gtest",
-      "@neopixel//:neopixel",
-      "@neopixel//:mock_neopixel",
+      "@aurora//:led_strip",
+      "@aurora//:mock_led_strip",
     ]
 )
 
@@ -90,7 +90,7 @@ cc_library(
   srcs = ["moving_led_effect.cpp"],
   deps = [
     ":led_effect",
-    "@neopixel//:neopixel",
+    "@aurora//:led_strip",
   ]
 )
 
@@ -101,8 +101,8 @@ cc_test(
     deps = [
       ":moving_led_effect",
       "@googletest//:gtest",
-      "@neopixel//:neopixel",
-      "@neopixel//:mock_neopixel",
+      "@aurora//:led_strip",
+      "@aurora//:mock_led_strip",
     ]
 )
 
@@ -113,7 +113,7 @@ cc_library(
   deps = [
     ":led_effect",
     ":color_function",
-    "@neopixel//:neopixel",
+    "@aurora//:led_strip",
   ]
 )
 
@@ -125,8 +125,8 @@ cc_test(
       ":interleaved_led_effect",
       ":mock_led_effect",
       "@googletest//:gtest",
-      "@neopixel//:neopixel",
-      "@neopixel//:mock_neopixel",
+      "@aurora//:led_strip",
+      "@aurora//:mock_led_strip",
     ]
 )
 
@@ -154,7 +154,7 @@ cc_library(
     srcs = ["pulse_color_function.cpp"],
     deps = [
       ":color_function",
-      "@neopixel//:neopixel"
+      "@aurora//:led_strip"
     ]
 )
 
@@ -164,7 +164,7 @@ cc_test(
     size = "small",
     deps = [
       ":pulse_color_function",
-      "@neopixel//:neopixel",
+      "@aurora//:led_strip",
       "@googletest//:gtest",
     ]
 )
@@ -181,7 +181,7 @@ ino(
     ":repeated_led_effect",
     ":sequential_led_effect",
     ":solid_led_effect",
-    "@neopixel//:neopixel",
-    "@neopixel//:neopixel_wrapper",
+    "@aurora//:led_strip",
+    "@aurora//:neopixel_strip",
   ]
 )

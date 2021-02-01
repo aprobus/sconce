@@ -4,6 +4,6 @@ local_repository(
 )
 
 local_repository(
-    name = "neopixel",
-    path = "../neopixel"
+    name = "aurora",
+    path = "../aurora"
 )

@@ -4,16 +4,16 @@
 #include <stdint.h>
 
 #include "led_effect.h"
-#include "neopixel.h"
+#include "led_strip.h"
 
 class MovingLedEffect : public LedEffect {
   public:
-  MovingLedEffect(Neopixel* pixels, color_t color, unsigned long millis_per_pixel);
+  MovingLedEffect(LedStrip* pixels, color_t color, unsigned long millis_per_pixel);
   void update(unsigned long millis) override;
   unsigned long length() const override;
 
   private:
-  Neopixel* pixels_;
+  LedStrip* pixels_;
   color_t color_;
   unsigned long millis_per_pixel_;
 };

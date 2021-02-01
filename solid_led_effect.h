@@ -2,16 +2,16 @@
 #define SOLID_LED_EFFECT_H
 
 #include "led_effect.h"
-#include "neopixel.h"
+#include "led_strip.h"
 
 class SolidLedEffect : public LedEffect {
   public:
-  SolidLedEffect(Neopixel* pixels, color_t color);
+  SolidLedEffect(LedStrip* pixels, color_t color);
   ~SolidLedEffect() = default;
   void update(unsigned long millis) override;
   unsigned long length() const override;
   private:
-    Neopixel* pixels_;
+    LedStrip* pixels_;
     color_t color_;
 };
 #endif

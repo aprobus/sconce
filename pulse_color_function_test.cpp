@@ -1,7 +1,7 @@
 #include "pulse_color_function.h"
 
 #include "gtest/gtest.h"
-#include "neopixel.h"
+#include "led_strip.h"
 
 TEST(PulseColorFunctionTest, Initial) {
   color_t color {100, 50, 0, 0};

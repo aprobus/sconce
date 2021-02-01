@@ -1,7 +1,7 @@
 #ifndef COLOR_FUNCTION_H
 #define COLOR_FUNCTION_H
 
-#include "neopixel.h"
+#include "led_strip.h"
 
 class ColorFunction {
   public:

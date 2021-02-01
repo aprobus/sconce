@@ -8,8 +8,8 @@
 #include "interleaved_led_effect.h"
 #include "led_effect_driver.h"
 #include "moving_led_effect.h"
-#include "neopixel.h"
-#include "neopixel_wrapper.h"
+#include "led_strip.h"
+#include "neopixel_strip.h"
 #include "pulse_color_function.h"
 #include "repeated_led_effect.h"
 #include "sequential_led_effect.h"
@@ -22,7 +22,7 @@ const int button_pin = A4;
 void setup() {
   // Section - Allocate
   Adafruit_NeoPixel raw_pixels{num_pixels, neopixel_pin, NEO_GRBW};
-  NeopixelWrapper pixels(&raw_pixels);
+  NeopixelStrip pixels(&raw_pixels);
 
   Button button(button_pin);
 

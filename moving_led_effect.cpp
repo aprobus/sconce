@@ -2,9 +2,9 @@
 
 #include <limits>
 
-#include "neopixel.h"
+#include "led_strip.h"
 
-MovingLedEffect::MovingLedEffect(Neopixel* pixels, color_t color, unsigned long millis_per_pixel) : pixels_(pixels), color_(color), millis_per_pixel_(millis_per_pixel) {}
+MovingLedEffect::MovingLedEffect(LedStrip* pixels, color_t color, unsigned long millis_per_pixel) : pixels_(pixels), color_(color), millis_per_pixel_(millis_per_pixel) {}
 
 void MovingLedEffect::update(unsigned long millis) {
   pixels_->clear();
