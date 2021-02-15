@@ -5,19 +5,52 @@
 #include <vector>
 
 #include "button.h"
-#include "interleaved_led_effect.h"
+#include "color_function_led_effect.h"
+#include "const_color_function.h"
 #include "led_effect_driver.h"
-#include "moving_led_effect.h"
 #include "led_strip.h"
+#include "moving_led_effect.h"
 #include "neopixel_strip.h"
 #include "pulse_color_function.h"
 #include "repeated_led_effect.h"
 #include "sequential_led_effect.h"
-#include "solid_led_effect.h"
 
 const int num_pixels = 40;
 const int neopixel_pin = 7;
 const int button_pin = A4;
+
+constexpr bool constTrue(uint16_t x) {
+  return true;
+}
+
+std::unique_ptr<LedEffect> buildSolidEffect(LedStrip* leds, color_t color) {
+  auto effect = std::unique_ptr<ColorFunctionLedEffect>(new ColorFunctionLedEffect(leds));
+  auto color_f = std::unique_ptr<ColorFunction>(new ConstColorFunction(color, 1));
+  effect->add(std::move(color_f), constTrue);
+  return effect;
+}
+
+class IsDiv {
+  public:
+  IsDiv(int x, int y) : x_(x), y_(y) {}
+
+  bool operator()(uint16_t time_millis) {
+    return time_millis % x_ == y_;
+  }
+  private:
+  int x_;
+  int y_;
+};
+
+std::unique_ptr<LedEffect> buildChristmasEffect(LedStrip* leds) {
+  auto effect = std::unique_ptr<ColorFunctionLedEffect>(new ColorFunctionLedEffect(leds));
+
+  effect->add(std::unique_ptr<ColorFunction>(new PulseColorFunction(color_t(0, 64, 8, 0), color_t(0, 255, 16, 0), 900)), IsDiv(3, 0));
+  effect->add(std::unique_ptr<ColorFunction>(new PulseColorFunction(color_t(64, 0, 0, 0), color_t(255, 8, 0, 0), 1100)), IsDiv(3, 1));
+  effect->add(std::unique_ptr<ColorFunction>(new PulseColorFunction(color_t(0, 0, 0, 16), color_t(0, 0, 0, 64), 1300)), IsDiv(3, 2));
+
+  return effect;
+}
 
 void setup() {
   // Section - Allocate
@@ -40,14 +73,10 @@ void setup() {
   color_t color_red = {255, 0, 0, 0};
   color_t color_blue = {0, 0, 255, 0};
 
-  led_driver.emplaceBack<SolidLedEffect>(&pixels, color_off);
-  led_driver.emplaceBack<SolidLedEffect>(&pixels, color_white);
+  led_driver.pushBack(buildSolidEffect(&pixels, color_off));
+  led_driver.pushBack(buildSolidEffect(&pixels, color_white));
 
-  auto christmas_seq = std::unique_ptr<InterleavedLedEffect>(new InterleavedLedEffect(&pixels));
-  christmas_seq->emplaceBack<PulseColorFunction>(color_t(0, 64, 8, 0), color_t(0, 255, 16, 0), 900);
-  christmas_seq->emplaceBack<PulseColorFunction>(color_t(64, 0, 0, 0), color_t(255, 8, 0, 0), 1100);
-  christmas_seq->emplaceBack<PulseColorFunction>(color_t(0, 0, 0, 16), color_t(0, 0, 0, 64), 1300);
-  led_driver.pushBack(std::move(christmas_seq));
+  led_driver.pushBack(buildChristmasEffect(&pixels));
 
   led_driver.begin();
 
